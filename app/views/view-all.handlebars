@@ -1,0 +1,16 @@
+{{>header }}
+<title>View quiz list</title>
+<h2>View all Quizzes!</h2>
+	<div>
+		<div class="quiz-list">
+			{{#each quiz}}
+			<div class="view-all-container">
+			<div class="quiz-parent">
+				<div class="quiz-child-bold">{{quiz_name}}</div>
+				<div class="quiz-child">{{quiz_description}}</div>
+				<a class="select-quiz-link" tabindex="-1" href="/quiz/{{quiz_id}}" ><button class="button-link">Select</button></a>
+			</div>
+			</div>
+			{{/each}}
+		</div>
+</div>
