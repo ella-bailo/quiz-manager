@@ -5,7 +5,7 @@ import { router as userRouter } from './routes/users';
 import { router as quizRouter } from './routes/quiz';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const error404 = { error: 404, message: 'Page not found.' };
 
 app.use(express.json());
