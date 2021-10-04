@@ -1,8 +1,8 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import handlebars from 'express-handlebars';
-import { router as userRouter } from './app/routes/users';
-import { router as quizRouter } from './app/routes/quiz';
+import { router as userRouter } from './routes/users';
+import { router as quizRouter } from './routes/quiz';
 
 const app = express();
 const port = 3000;
