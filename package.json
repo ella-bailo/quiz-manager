@@ -7,12 +7,13 @@
   },
   "scripts": {
     "prepare": "cd .. && husky install .husky",
+    "tsc": "tsc",
     "eslint": "node_modules/.bin/eslint --ignore-path .gitignore . --fix",
     "lint-staged": "lint-staged",
     "test": "jest --passWithNoTests --coverage",
     "start": "npm run build && node ./dist/app",
     "dev": "npm run build && nodemon ./dist/app",
-    "build": "rm -rf dist && tsc"
+    "build": "rm -rf dist && npm run tsc"
   },
   "dependencies": {
     "cookie-parser": "^1.4.5",
