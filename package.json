@@ -10,8 +10,8 @@
     "eslint": "node_modules/.bin/eslint --ignore-path .gitignore . --fix",
     "lint-staged": "lint-staged",
     "test": "jest --passWithNoTests --coverage",
-    "start": "npm run build && node ./dist/app",
-    "dev": "npm run build && nodemon ./dist/app",
+    "start": "npm run build && node ./dist",
+    "dev": "npm run build && nodemon ./dist",
     "build": "rm -rf dist && tsc"
   },
   "dependencies": {
