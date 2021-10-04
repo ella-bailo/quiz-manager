@@ -11,7 +11,7 @@
     "eslint": "node_modules/.bin/eslint --ignore-path .gitignore . --fix",
     "lint-staged": "lint-staged",
     "test": "jest --passWithNoTests --coverage",
-    "start": "npm run build && node ./dist/app",
+    "start": "node ./dist/app",
     "dev": "npm run build && nodemon ./dist/app",
     "build": "rm -rf dist && tsc",
     "postinstall": "npm run build"
