@@ -12,8 +12,6 @@ const connect = async (): Promise<Client> => {
   return client;
 };
 
-console.log(options);
-
 const getPayloadOptions = (result): PartialPayload => {
   return {
     uuid: result.uuid,
@@ -52,7 +50,6 @@ export const hashPassword = async (
   const hashedPassword = crypto
     .pbkdf2Sync(password, salt, 1000, 64, `sha256`)
     .toString(`hex`);
-  console.log(hashPassword);
   return hashedPassword;
 };
 
