@@ -4,7 +4,7 @@ import handlebars from 'express-handlebars';
 import { router as userRouter } from './routes/users';
 
 const app = express();
-const port = 4000;
+const port = 3000;
 const error404 = { error: 404, message: 'Page not found.' };
 
 app.use(express.json());
