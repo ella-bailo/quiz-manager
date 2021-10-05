@@ -1,6 +1,6 @@
 import express from 'express';
 import { middleware } from '../middleware/middleware';
-import { getQuizzes } from '../services/quiz-service';
+import { getQuiz, getQuizzes, verifyQuizId } from '../services/quiz-service';
 import { checkPermissions } from '../middleware/check-permissions';
 
 const error403 = {
@@ -11,6 +11,8 @@ const error500 = {
   error: 500,
   message: 'Something went wrong, please try again.',
 };
+
+const error404 = { error: 404, message: 'Page not found.' };
 
 export const router = express.Router();
 
@@ -54,7 +56,14 @@ router.get('/:quizId', async (req, res) => {
   try {
     const permissions = await checkPermissions(req);
     if (!permissions['invalid']) {
+      const { quizId } = req.params;
+      const quizIdIsValid = await verifyQuizId(quizId);
+      if (quizIdIsValid === undefined) {
+        res.render('error-page.handlebars', error404);
+      }
+      const quiz = await getQuiz(quizId);
       const data = {
+        quiz: quiz,
         permission: permissions,
       };
       res.render('view-quiz.handlebars', data);
@@ -70,6 +79,11 @@ router.get('/edit/:quizId', async (req, res) => {
   try {
     const permissions = await checkPermissions(req);
     if (permissions['edit']) {
+      const { quizId } = req.params;
+      const quizIdIsValid = await verifyQuizId(quizId);
+      if (quizIdIsValid === undefined) {
+        res.render('error-page.handlebars', error404);
+      }
       const data = {
         permission: permissions,
       };
