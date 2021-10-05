@@ -1,7 +1,7 @@
 # Quiz Manager
 A CRUD website buit with express and handlebars to facilitate the managment of quizzes.
 
-##Prerequisites
+## Prerequisites
 You will need to have [docker](https://docs.docker.com/get-docker/) set up to run the database.
 
 ## Running 
@@ -12,9 +12,7 @@ first spin up the database:
 
 then in a new terminal:
 
-`cd app && cd db`
-
-`npm start` 
+`npm build && npm start` 
 
 OR 
 
@@ -29,3 +27,8 @@ Spin up the database:
 Then in a new terminal:
 
 `npm run dev`
+
+## Deploying 
+
+This project deployes to heroku on merge to master [here](http://eb-quiz-manager.herokuapp.com/). 
+Pre commit hooks are set up to run es-lint and all unit tests, therefore the db will need to be spun up as detailed above in order to make a commit. 
