@@ -84,7 +84,9 @@ router.get('/edit/:quizId', async (req, res) => {
       if (quizIdIsValid === undefined) {
         res.render('error-page.handlebars', error404);
       }
+      const quiz = await getQuiz(quizId);
       const data = {
+        quiz: quiz,
         permission: permissions,
       };
       res.render('edit-quiz.handlebars', data);
