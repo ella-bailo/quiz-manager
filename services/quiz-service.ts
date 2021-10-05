@@ -18,12 +18,12 @@ export const getQuizzes = async (): Promise<QuizList> => {
 
 export const verifyQuizId = async (quizId: string): Promise<true | void> => {
   const client = await connect();
-  const checkQuizId = await client.query(
+  const response = await client.query(
     'SELECT * FROM quiz WHERE quiz_id = $1;',
     [quizId]
   );
   client.end();
-  if (checkQuizId.rows[0]) {
+  if (response.rows[0]) {
     return true;
   }
 };
