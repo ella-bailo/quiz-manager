@@ -1,4 +1,59 @@
 {{>header }}
 <title>View quiz page</title>
 {{>quiz-info}}
-<h2>View quiz page</h2>
+{{#if permission.edit}}
+<div class="buttons-wrapper">
+<button id="toggle-answers" onclick="toggleAnswers()" class="button-link-toggle-show-answers">Show answers</button>
+<a tabindex="-1" href="/quiz/edit/{{quiz.quiz_id}}" ><button class="button-link-toggle">Edit Quiz</button></a>
+</div>
+{{/if}}
+{{#if permission.view}}
+<div class="button-wrapper">
+<button id="toggle-answers" onclick="toggleAnswers()" class="button-link-toggle-show-answers">Show answers</button>
+</div>
+{{/if}}
+<ol>
+{{#each quiz.questions}}
+<div class="quiz-question-container">
+	<div id="{{question_id}}"class="quiz-question-parent">
+		<li class="quiz-question" type="A">{{question}}</li>
+		{{#each answers}}
+		<div id="{{answer_id}}" class="answer-wrapper"><b class="answer-number">{{math @index "+" 1}}. </b><strong class="answer">{{answer}}</strong></div>
+		{{/each}}
+	</div>
+</div>
+{{/each}}
+</ol>
+
+<script>
+	const quiz = JSON.parse('{{{json quiz}}}');
+	const questions = quiz.questions;
+	const numberOfQuestions = Object.keys(questions).length;
+	document.getElementById("number-of-questions").textContent = `${numberOfQuestions} questions`;
+
+	function toggleAnswers () {
+		const button = document.getElementById("toggle-answers");
+
+		if (button.className == "button-link-toggle-show-answers") {
+			for (const question in questions) {
+				const correctAnswer = questions[question]['correct_answer'];
+				document.getElementById(correctAnswer).className = "correct-answer";
+			};
+			button.className = "button-link-toggle-hide-answers";
+			button.textContent = "Hide answers";
+			return;
+		};
+		if (button.className == "button-link-toggle-hide-answers") {
+			const correctAnswers = document.getElementsByClassName("correct-answer");
+			while (correctAnswers.length > 0) {
+				for (const answer of correctAnswers) {
+					answer.className = "answer";
+					console.log(answer);
+				};
+			};
+			button.className = "button-link-toggle-show-answers";
+			button.textContent = "Show answers"
+			return;
+		};
+	};
+</script>

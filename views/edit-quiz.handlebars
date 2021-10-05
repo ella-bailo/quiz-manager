@@ -1,4 +1,55 @@
 {{>header }}
-<title>Edit quiz page</title>
 {{>quiz-info }}
-<h2>Edit quiz page</h2>
+<title>Edit quiz page</title>
+<div class="buttons-wrapper">
+	<button id="add-answer" class="button-link-toggle-show-answers">Add question</button>
+	<a tabindex="-1" href="/quiz/{{quiz.quiz_id}}"><button class="button-link-toggle">View Quiz</button></a>
+</div>
+<ol>
+{{#each quiz.questions}}
+<div class="quiz-edit-question-container">
+	<div id="{{question_id}}"class="quiz-question-parent">
+		<li type="A"></li>
+
+		<form id="question-form-{{question_id}}">
+				<label for="question">Edit Question:</label></form></br>
+					<input type="text" class ="edit-input" name="question" placeholder='{{question}}'>
+					<input type="text" class ="edit-input" name="questionId" value='{{question_id}}' /hidden>
+					<input type="submit" id="form-button-submit-question-{{question_id}}"value="save" />
+				</label>
+		</form>
+	
+		{{#each answers}}
+			<form id="question-form-{{answer_id}}">
+				<label for="question">Edit answer {{math @index "+" 1}}:</label></form></br>
+					<input type="text" class ="edit-input" name="question" placeholder='{{answer}}'>
+					<input type="text" class ="edit-input" name="questionId" value='{{answer_id}}' /hidden>
+					<input type="submit" value="save" />
+					<button>Delete</button>
+				</label>
+			</form>
+		{{/each}}
+			<form id="correct-answer-form-{{question_id}}">
+				<label for="question">Change correct answer:</label></form></br>
+					<select name="correctAnswer">
+					{{#each answers}}
+					<option value="{{answer}}">{{answer}}</option>
+					{{/each}}
+				</select>
+					<input type="text"  name="questionId" value='{{question_id}}' /hidden>
+					<input type="submit" value="save" />
+				</label>
+		</form></br></br>
+		<button>Add new answer</button>
+		<button>Delete Question</button>
+	</div>
+</div>
+{{/each}}
+</ol>
+
+<script>
+	const quiz = JSON.parse('{{{json quiz}}}');
+	const questions = quiz.questions;
+	const numberOfQuestions = Object.keys(questions).length;
+	document.getElementById("number-of-questions").textContent = `${numberOfQuestions} questions`;
+</script>

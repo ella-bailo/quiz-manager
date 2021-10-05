@@ -340,3 +340,231 @@ span {
 	margin-top: 15px;
 	margin-right: 5px;
 }
+
+.select-quiz-link {
+	float: right;
+	position: relative;
+	margin-top: 15px;
+	margin-right: 5px;
+}
+
+.quiz-child {
+	float: left;
+	position: relative;
+	margin-top: 40px;
+	margin-left: 20px;
+}
+
+.quiz-child-bold {
+	float: left;
+	position: relative;
+	margin-top: 40px;
+	margin-left: 20px;
+	font-weight: bold;
+	color: var(--dark);
+}
+
+.navbar {
+	margin: 20px;
+	width: 100%;
+}
+
+.navbar ul {
+	margin: 0;
+	padding: 5px;
+	list-style-type: none;
+	text-align: center;
+	background-color: #000;
+	height: 30px;
+}
+
+.navbar ul li {
+	display: inline;
+}
+
+.navbar ul li a {
+	text-decoration: none;
+	padding: 0.2em 1em;
+	color: #fff;
+	background-color: #000;
+}
+
+.navbar ul li a:hover {
+	color: #000;
+	background-color: #fff;
+}
+
+.navbar ul li a:focus {
+	color: #000;
+	background-color: #fff;
+}
+
+.error-child {
+	text-align: center;
+	margin-top: 70px;
+}
+
+.quiz-question-container {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	margin-bottom: 40px;
+	min-height: 250px;
+	border-left-style: solid;
+	border-left-width: 10px;
+	border-left-color: var(--accent);
+}
+
+.quiz-question-parent {
+	margin-left: 50px;
+	align-content: center;
+}
+
+.quiz-question {
+	font-weight: bold;
+	margin: 20px;
+	color: var(--dark);
+}
+
+.answer-wrapper {
+	margin-bottom: 15px;
+}
+
+.buttons-wrapper {
+	margin-top: 18px;
+	margin-left: 450px;
+}
+
+.button-wrapper {
+	margin-top: 18px;
+	margin-left: 600px;
+}
+
+.button-link-toggle {
+	background: var(--shadow-dark);
+	padding: 10px 25px;
+	border: 1px solid var(--shadow-dark);
+	background-color: var(--shadow-dark);
+	color: #fff;
+	border-radius: 4px;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	min-width: 150px;
+}
+
+.button-link-toggle-show-answers {
+	background: var(--shadow-dark);
+	padding: 10px 25px;
+	border: 1px solid var(--shadow-dark);
+	background-color: var(--shadow-dark);
+	color: #fff;
+	border-radius: 4px;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	min-width: 150px;
+}
+
+.button-link-toggle-hide-answers {
+	background: var(--shadow-dark);
+	padding: 10px 25px;
+	border: 1px solid var(--shadow-dark);
+	background-color: var(--shadow-dark);
+	color: #fff;
+	border-radius: 4px;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	min-width: 150px;
+}
+
+.button-link-toggle:hover {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.button-link-toggle:focus {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.button-link-toggle-edit:hover {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.button-link-toggle-show-answers:focus {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.button-link-toggle-show-answers:hover {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.button-link-toggle-hide-answers:focus {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.button-link-toggle-hide-answers:hover {
+	background-color: var(--accent);
+	transition: 0.3s;
+}
+
+.answer-number {
+	font-weight: bold;
+	color: var(--accent);
+}
+
+.answer {
+	font-weight: lighter;
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+.correct-answer {
+	border: solid;
+	border-color: var(--accent);
+	max-width: 600px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.quiz-edit-question-container {
+	background-color: #fff;
+	padding-top: 20px;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	margin-bottom: 40px;
+	min-height: 600px;
+	border-left-style: solid;
+	border-left-width: 10px;
+	border-left-color: var(--accent);
+
+}
+
+.edit-input {
+	min-width: 400px;
+	text-align: left;
+}
