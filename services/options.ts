@@ -6,7 +6,10 @@ export const options: ClientConfig = {
   user: process.env.DB_USERNAME || 'main',
   database: process.env.DB_NAME || 'quiz-manager-db',
   password: process.env.DB_PASSWORD || 'password',
-  ssl: {
-    rejectUnauthorized: false,
-  },
 };
+
+if (process.env.PROD) {
+  options.ssl = {
+    rejectUnauthorized: false,
+  };
+}

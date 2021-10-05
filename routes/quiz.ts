@@ -33,3 +33,51 @@ router.get('/all', async (req, res) => {
     res.render('error-page.handlebars', error500);
   }
 });
+
+router.get('/new', async (req, res) => {
+  try {
+    const permissions = await checkPermissions(req);
+    if (permissions['edit']) {
+      const data = {
+        permission: permissions,
+      };
+      res.render('create-quiz.handlebars', data);
+    } else {
+      res.render('error-page.handlebars', error403);
+    }
+  } catch {
+    res.render('error-page.handlebars', error500);
+  }
+});
+
+router.get('/:quizId', async (req, res) => {
+  try {
+    const permissions = await checkPermissions(req);
+    if (!permissions['invalid']) {
+      const data = {
+        permission: permissions,
+      };
+      res.render('view-quiz.handlebars', data);
+    } else {
+      res.render('error-page.handlebars', error403);
+    }
+  } catch {
+    res.render('error-page.handlebars', error500);
+  }
+});
+
+router.get('/edit/:quizId', async (req, res) => {
+  try {
+    const permissions = await checkPermissions(req);
+    if (permissions['edit']) {
+      const data = {
+        permission: permissions,
+      };
+      res.render('edit-quiz.handlebars', data);
+    } else {
+      res.render('error-page.handlebars', error403);
+    }
+  } catch {
+    res.render('error-page.handlebars', error500);
+  }
+});
