@@ -28,6 +28,32 @@ export const verifyQuizId = async (quizId: string): Promise<true | void> => {
   }
 };
 
+export const addQuiz = async (
+  quizName: string,
+  quizDescription: string
+): Promise<string> => {
+  const client = await connect();
+  const response = await client.query(
+    'INSERT INTO quiz (quiz_name, quiz_description) VALUES($1, $2) RETURNING quiz_id',
+    [quizName, quizDescription]
+  );
+  client.end();
+  return response.rows[0]['quiz_id'];
+};
+
+export const deleteQuiz = async (quizId: string): Promise<void> => {
+  const client = await connect();
+  await client.query('DELETE FROM quiz WHERE quiz_id = $1', [quizId]);
+  const response = await client.query(
+    'DELETE FROM  question WHERE quiz_id = $1 RETURNING question_id',
+    [quizId]
+  );
+  const questionId = response.rows[0]['question_id'];
+  await client.query('DELETE FROM answer WHERE question_id = $1', [questionId]);
+  client.end();
+  return;
+};
+
 export const getQuiz = async (quizId: string): Promise<unknown> => {
   const client = await connect();
   const quizData = await client.query(

@@ -1,14 +1,29 @@
 const options: ClientConfig = {
   host: 'localhost',
-  port: 5433,
+  port: 5436,
   user: 'main',
-  database: 'quiz-manager-db',
+  database: 'test-quiz-db',
   password: 'password',
 };
 
 jest.doMock('./options', () => ({ options }));
 import { ClientConfig } from 'pg';
-import { getQuizzes, getQuiz, verifyQuizId } from './quiz-service';
+import {
+  getQuizzes,
+  getQuiz,
+  verifyQuizId,
+  addQuiz,
+  deleteQuiz,
+} from './quiz-service';
+import { getQuestion } from './question-service';
+import { getAnswer } from './answer-service';
+
+const newQuizName = 'Test quiz';
+const newQuizDescription = 'Test quiz description';
+const newQuizId = '4';
+const deletedQuizId = '1';
+const deletedQuestionId = '1';
+const deletedAnswerId = '1';
 
 const sampleQuizOne = {
   quiz_id: '1',
@@ -107,6 +122,22 @@ describe('quiz-service', () => {
     it('returns undefined if quizId is not the database', async () => {
       const result = await verifyQuizId(invalidQuizId);
       expect(result).toEqual(undefined);
+    });
+  });
+  describe('addQuiz', () => {
+    it('returns quiz id of new quiz', async () => {
+      const result = await addQuiz(newQuizName, newQuizDescription);
+      expect(result).toEqual(newQuizId);
+    });
+  });
+  describe('deleteQuiz', () => {
+    it('deletes quiz and corresponding questions and answers and returns undefined', async () => {
+      const response = await deleteQuiz(deletedQuizId);
+      const question = await getQuestion(deletedQuestionId);
+      const answer = await getAnswer(deletedAnswerId);
+      expect(response).toEqual(undefined);
+      expect(question).toEqual(undefined);
+      expect(answer).toEqual(undefined);
     });
   });
   describe('getQuiz', () => {

@@ -28,7 +28,7 @@ const deletedAnswerId = '93';
 const updateQuestionId = '32';
 const updateQuestionText = 'test';
 
-describe('quiz-service', () => {
+describe('question-service', () => {
   describe('checkNumberOfQuestions', () => {
     it('returns true if number of questions is less than 26', async () => {
       const result = await checkNumberOfQuestions(questionId);
@@ -51,7 +51,7 @@ describe('quiz-service', () => {
     expect(result).toEqual(undefined);
   });
   describe('addQuestion', () => {
-    it('returns answer id of new answer', async () => {
+    it('returns question id of new question', async () => {
       const correctAnswer = await addAnswer('A frog', questionId);
       const result = await addQuestion(
         newQuestionText,

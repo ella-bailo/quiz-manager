@@ -34,3 +34,14 @@ services:
       - ./schema:/docker-entrypoint-initdb.d/
     ports:
       - 5435:5432
+  postgres-test-quiz: 
+    image: postgres:12.4
+    restart: always 
+    environment: 
+      - POSTGRES_USER=main
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=test-quiz-db
+    volumes: 
+      - ./schema:/docker-entrypoint-initdb.d/
+    ports:
+      - 5436:543
