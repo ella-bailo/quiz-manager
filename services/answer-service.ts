@@ -49,6 +49,7 @@ export const addAnswer = async (
     'INSERT INTO answer (answer, question_id) VALUES($1, $2) RETURNING answer_id',
     [answer, questionId]
   );
+  client.end();
   return response.rows[0]['answer_id'];
 };
 
@@ -66,6 +67,7 @@ export const checkAnswerIsNotCorrect = async (
     'SELECT * FROM question WHERE correct_answer = $1 AND  question_id = $2',
     [answerId, questionId]
   );
+  client.end();
   if (secondResponse.rows[0]) {
     return undefined;
   }
@@ -75,6 +77,7 @@ export const checkAnswerIsNotCorrect = async (
 export const deleteAnswer = async (answerId: string): Promise<void> => {
   const client = await connect();
   await client.query('DELETE FROM answer WHERE answer_id = $1', [answerId]);
+  client.end();
   return;
 };
 
@@ -87,5 +90,6 @@ export const updateAnswer = async (
     updateText,
     answerId,
   ]);
+  client.end();
   return;
 };
