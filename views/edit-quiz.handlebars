@@ -2,46 +2,65 @@
 {{>quiz-info }}
 <title>Edit quiz page</title>
 <div class="buttons-wrapper">
-	<button id="add-answer" class="button-link-toggle-show-answers">Add question</button>
+	<button id="add-answer" class="button-link-toggle-show-answers">Delete quiz</button>
 	<a tabindex="-1" href="/quiz/{{quiz.quiz_id}}"><button class="button-link-toggle">View Quiz</button></a>
+</div>
+<div class="add-question-container">
+	<h3>Add question</h3>
+		<form id="add-question-form" method="post" action="/question/add">
+				<input type="text" name="quizId" value={{quiz.quiz_id}} hidden/>
+				<label for="question" class="edit-label">Question:</label></br>
+					<input type="text" class ="edit-input" name="question">
+				</label></br>
+				<label for="answerOne" class="edit-label">Correct answer:</label></br>
+					<input type="text" class ="edit-input" name="answerOne">
+				</label></br>
+				<label for="answerTwo" class="edit-label">Incorect answer 1:</label></br>
+					<input type="text" class ="edit-input" name="answerTwo">
+				</label></br>
+				<label for="answerThree" class="edit-label">Incorrect answer 2:</label></br>
+					<input type="text" class ="edit-input" name="answerThree">
+				</label></br>
+				<input type="submit" id="form-button-submit-question-{{question_id}}" value="save" class="save-submit"/>
+		</form>
 </div>
 <ol>
 {{#each quiz.questions}}
 <div class="quiz-edit-question-container">
 	<div id="{{question_id}}"class="quiz-question-parent">
-		<li type="A"></li>
+		<li type="A" class="question-letter"></li>
 
 		<form id="question-form-{{question_id}}">
-				<label for="question">Edit Question:</label></form></br>
+				<label for="question" class="edit-label">Edit Question:</label></form></br>
 					<input type="text" class ="edit-input" name="question" placeholder='{{question}}'>
 					<input type="text" class ="edit-input" name="questionId" value='{{question_id}}' /hidden>
-					<input type="submit" id="form-button-submit-question-{{question_id}}"value="save" />
 				</label>
+				<input type="submit" id="form-button-submit-question-{{question_id}}"value="save" class="save-submit"/>
 		</form>
 	
 		{{#each answers}}
 			<form id="question-form-{{answer_id}}">
-				<label for="question">Edit answer {{math @index "+" 1}}:</label></form></br>
+				<label for="question" class="edit-label">Edit answer {{math @index "+" 1}}:</label></form></br>
 					<input type="text" class ="edit-input" name="question" placeholder='{{answer}}'>
 					<input type="text" class ="edit-input" name="questionId" value='{{answer_id}}' /hidden>
-					<input type="submit" value="save" />
-					<button>Delete</button>
+					<input class="save-submit" type="submit" value="save" />
+					<button id="delete-answer-{{question_id}}" class="delete-answer-button">Delete</button>
 				</label>
 			</form>
 		{{/each}}
 			<form id="correct-answer-form-{{question_id}}">
-				<label for="question">Change correct answer:</label></form></br>
+				<label for="question" class="edit-label">Change correct answer:</label></form></br>
 					<select name="correctAnswer">
 					{{#each answers}}
-					<option value="{{answer}}">{{answer}}</option>
+					<option id="option-{{answer_id}}" value="{{answer}}">{{answer}}</option>
 					{{/each}}
 				</select>
 					<input type="text"  name="questionId" value='{{question_id}}' /hidden>
-					<input type="submit" value="save" />
+					<input type="submit" value="save" class="save-submit" />
 				</label>
 		</form></br></br>
-		<button>Add new answer</button>
-		<button>Delete Question</button>
+		<button id="add-answer-{{question_id}}" class="add-answer-button">Add new answer</button>
+		<button id="delete-question-{{question_id}}" class="delete-question-button">Delete Question</button>
 	</div>
 </div>
 {{/each}}
@@ -51,5 +70,34 @@
 	const quiz = JSON.parse('{{{json quiz}}}');
 	const questions = quiz.questions;
 	const numberOfQuestions = Object.keys(questions).length;
-	document.getElementById("number-of-questions").textContent = `${numberOfQuestions} questions`;
+	{{!-- document.getElementById("number-of-questions").textContent = `${numberOfQuestions} questions`; --}}
+	const addAnswerButtons = document.getElementsByClassName("add-answer-button");
+	const deleteAnswerButtons = document.getElementsByClassName("delete-answer-button");
+
+	for (const question in questions) {
+		const correctAnswer = questions[question]['correct_answer'];
+		document.getElementById(`option-${correctAnswer}`).setAttribute("selected", "selected");
+	};
+
+	for (let i = 0; i < deleteAnswerButtons.length; i++) {
+		const element = deleteAnswerButtons[i];
+		const elementId = element.id;
+		const length = elementId.length;
+		const questionId = elementId.slice(14, length);
+		const answers = quiz['questions'][questionId]['answers'];
+		if (Object.keys(answers).length <= 3) {
+			element.hidden = true;
+		}
+	};
+
+	for (let i = 0; i < addAnswerButtons.length; i++) {
+		const element = addAnswerButtons[i];
+		const elementId = element.id;
+		const length = elementId.length;
+		const questionId = elementId.slice(11, length);
+		const answers = quiz['questions'][questionId]['answers'];
+		if (Object.keys(answers).length >= 5) {
+			element.hidden = true;
+		} 
+	};
 </script>

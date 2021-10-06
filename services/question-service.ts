@@ -59,13 +59,12 @@ export const checkCorrectAnswerExists = async (
 
 export const addQuestion = async (
   question: string,
-  quizId: string,
-  correctAnswer: string
+  quizId: string
 ): Promise<string> => {
   const client = await connect();
   const response = await client.query(
-    'INSERT INTO question (question, correct_answer, quiz_id) VALUES($1, $2, $3) RETURNING question_id',
-    [question, correctAnswer, quizId]
+    'INSERT INTO question (question, correct_answer, quiz_id) VALUES($1, 0, $2) RETURNING question_id',
+    [question, quizId]
   );
   client.end();
   return response.rows[0]['question_id'];
@@ -73,10 +72,10 @@ export const addQuestion = async (
 
 export const deleteQuestion = async (questionId: string): Promise<void> => {
   const client = await connect();
+  await client.query('DELETE FROM answer WHERE question_id = $1', [questionId]);
   await client.query('DELETE FROM question WHERE question_id = $1', [
     questionId,
   ]);
-  await client.query('DELETE FROM answer WHERE question_id = $1', [questionId]);
   client.end();
   return;
 };
@@ -89,6 +88,19 @@ export const updateQuestion = async (
   await client.query(
     'UPDATE question SET question = $1 WHERE question_id = $2',
     [updateText, questionId]
+  );
+  client.end();
+  return;
+};
+
+export const updateCorrectAnswer = async (
+  questionId: string,
+  updateId: string
+): Promise<void> => {
+  const client = await connect();
+  await client.query(
+    'UPDATE question SET correct_answer = $1 WHERE question_id = $2',
+    [updateId, questionId]
   );
   client.end();
   return;

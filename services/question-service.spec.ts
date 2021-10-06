@@ -15,6 +15,7 @@ import {
   addQuestion,
   deleteQuestion,
   updateQuestion,
+  updateCorrectAnswer,
 } from './question-service';
 import { addAnswer, getAnswer } from './answer-service';
 
@@ -27,6 +28,8 @@ const newQuestionId = '33';
 const deletedAnswerId = '93';
 const updateQuestionId = '32';
 const updateQuestionText = 'test';
+const updateCorrectAnswerQuestionId = '31';
+const updateCorrectAnswerId = '97';
 
 describe('question-service', () => {
   describe('checkNumberOfQuestions', () => {
@@ -52,12 +55,7 @@ describe('question-service', () => {
   });
   describe('addQuestion', () => {
     it('returns question id of new question', async () => {
-      const correctAnswer = await addAnswer('A frog', questionId);
-      const result = await addQuestion(
-        newQuestionText,
-        newQuestionQuizId,
-        correctAnswer
-      );
+      const result = await addQuestion(newQuestionText, newQuestionQuizId);
       expect(result).toEqual(newQuestionId);
     });
   });
@@ -80,6 +78,17 @@ describe('question-service', () => {
       const question = await getQuestion(updateQuestionId);
       expect(response).toEqual(undefined);
       expect(question['question']).toEqual(updateQuestionText);
+    });
+  });
+  describe('updateCorrectAnswer', () => {
+    it('updates correct answer and returns undefined', async () => {
+      const response = await updateCorrectAnswer(
+        updateCorrectAnswerQuestionId,
+        updateCorrectAnswerId
+      );
+      const question = await getQuestion(updateCorrectAnswerQuestionId);
+      expect(response).toEqual(undefined);
+      expect(question['correct_answer']).toEqual(updateCorrectAnswerId);
     });
   });
 });

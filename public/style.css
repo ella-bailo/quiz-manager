@@ -557,7 +557,7 @@ span {
 	width: 768px;
 	max-width: 100%;
 	margin-bottom: 40px;
-	min-height: 600px;
+	min-height: 650px;
 	border-left-style: solid;
 	border-left-width: 10px;
 	border-left-color: var(--accent);
@@ -567,4 +567,82 @@ span {
 .edit-input {
 	min-width: 400px;
 	text-align: left;
+	margin-bottom: 10px;
+	min-height: 30px;
+	border-color: var(--accent);
+}
+
+.edit-label {
+	color: var(--dark);
+	font-weight: bold;
+
+}
+.question-letter {
+	font-weight: bold;
+	color: var(--accent);
+	margin-bottom: 10px;
+}
+
+.delete-answer-button {
+	border-radius: 4px;
+	padding: 5px;
+	border: 1px solid var(--black);
+	background-color: var(--black);
+	color: var(--white);
+	font-weight: bold;
+	letter-spacing: 1px;
+	transition: transform 80ms ease-in;
+}
+
+.save-submit {
+	border-radius: 4px;
+	padding: 5px;
+	border: 1px solid var(--accent);
+	background-color: var(--accent);
+	color: var(--white);
+	font-weight: bold;
+	letter-spacing: 1px;
+	transition: transform 80ms ease-in;
+}
+
+.add-answer-button {
+	border-radius: 4px;
+	padding: 5px;
+	border: 1px solid var(--accent);
+	background-color: var(--accent);
+	color: var(--white);
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+
+}
+
+.delete-question-button {
+	border-radius: 4px;
+	padding: 5px;
+	border: 1px solid var(--black);
+	background-color: var(--black);
+	color: var(--white);
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.add-question-container {
+	background-color: #fff;
+	padding-top: 20px;
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 400px;
+	margin-bottom: 40px;
+	padding-left: 30px;
+	margin-left: 30px;
+	margin-top: 15px;
+
 }

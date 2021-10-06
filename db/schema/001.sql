@@ -20,13 +20,15 @@ CREATE TABLE question (
     quiz_id bigint,
     question varchar NOT NULL, 
     correct_answer bigint NOT NULL,
-    PRIMARY KEY (question_id)
+    PRIMARY KEY (question_id),
+    CONSTRAINT fk_quiz FOREIGN KEY(quiz_id) REFERENCES quiz(quiz_id)
 );
 
 CREATE TABLE answer (
     answer_id bigserial,
     question_id bigint,
-    answer varchar
+    answer varchar,
+    CONSTRAINT fk_question FOREIGN KEY(question_id) REFERENCES question(question_id)
 );
 
 CREATE INDEX quiz_idx ON quiz (quiz_id);

@@ -43,13 +43,24 @@ export const addQuiz = async (
 
 export const deleteQuiz = async (quizId: string): Promise<void> => {
   const client = await connect();
-  await client.query('DELETE FROM quiz WHERE quiz_id = $1', [quizId]);
   const response = await client.query(
-    'DELETE FROM  question WHERE quiz_id = $1 RETURNING question_id',
+    'SELECT question_id FROM question WHERE quiz_id = $1',
     [quizId]
   );
-  const questionId = response.rows[0]['question_id'];
-  await client.query('DELETE FROM answer WHERE question_id = $1', [questionId]);
+  const questionIds = response.rows;
+  const obj = {};
+  for (const id in questionIds) {
+    obj[id] = questionIds[id]['question_id'];
+  }
+  const questionIdArray = Object.values(obj);
+
+  for (const id in questionIdArray) {
+    await client.query('DELETE FROM answer WHERE question_id = $1', [
+      questionIdArray[id],
+    ]);
+  }
+  await client.query('DELETE FROM question WHERE quiz_id = $1', [quizId]);
+  await client.query('DELETE FROM quiz WHERE quiz_id = $1', [quizId]);
   client.end();
   return;
 };
