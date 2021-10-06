@@ -30,11 +30,12 @@
 	<div id="{{question_id}}"class="quiz-question-parent">
 		<li type="A" class="question-letter"></li>
 
-		<form id="question-form-{{question_id}}">
-				<label for="question" class="edit-label">Edit Question:</label></form></br>
+		<form id="question-form-{{question_id}}" method="post" action="/question/update">
+				<label for="question" class="edit-label">Edit Question:</label></br>
+					<input type="text" class ="edit-input" name="quizId" value='{{quiz_id}}' /hidden>
 					<input type="text" class ="edit-input" name="question" placeholder='{{question}}'>
 					<input type="text" class ="edit-input" name="questionId" value='{{question_id}}' /hidden>
-				</label>
+					</label>
 				<input type="submit" id="form-button-submit-question-{{question_id}}"value="save" class="save-submit"/>
 		</form>
 	
@@ -48,19 +49,24 @@
 				</label>
 			</form>
 		{{/each}}
-			<form id="correct-answer-form-{{question_id}}">
-				<label for="question" class="edit-label">Change correct answer:</label></form></br>
+			<form id="correct-answer-form-{{question_id}}" method="post" action="/question/update-correct-answer">
+				<label for="correctAnswer">Change correct answer:</label></br>
 					<select name="correctAnswer">
 					{{#each answers}}
-					<option id="option-{{answer_id}}" value="{{answer}}">{{answer}}</option>
+					<option id="option-{{answer_id}}" value={{answer_id}}>{{answer}}</option>
 					{{/each}}
 				</select>
-					<input type="text"  name="questionId" value='{{question_id}}' /hidden>
-					<input type="submit" value="save" class="save-submit" />
 				</label>
+					<input type="text"  name="questionId" value='{{question_id}}' /hidden>
+					<input type="text"  name="quizId" value='{{quiz_id}}' /hidden>
+					<input type="submit" value="save" class="save-submit" />
 		</form></br></br>
 		<button id="add-answer-{{question_id}}" class="add-answer-button">Add new answer</button>
-		<button id="delete-question-{{question_id}}" class="delete-question-button">Delete Question</button>
+		<form id="delete-question-form-{{question_id}}" method="post" action="/question/delete">
+			<input type=text name="quizId" value={{quiz_id}} /hidden>
+			<input type=text name="questionId" value={{question_id}} /hidden>
+			<input type="submit" id="delete-question-{{question_id}}" class="delete-question-button"/ value="Delete Question">
+		</form>
 	</div>
 </div>
 {{/each}}
