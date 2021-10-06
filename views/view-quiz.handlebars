@@ -1,6 +1,7 @@
 {{>header }}
 <title>View quiz page</title>
 {{>quiz-info}}
+<h3 id="number-of-questions" class="number-of-questions">Number of questions</h3>
 {{#if permission.edit}}
 <div class="buttons-wrapper">
 <button id="toggle-answers" onclick="toggleAnswers()" class="button-link-toggle-show-answers">Show answers</button>
@@ -48,7 +49,6 @@
 			while (correctAnswers.length > 0) {
 				for (const answer of correctAnswers) {
 					answer.className = "answer";
-					console.log(answer);
 				};
 			};
 			button.className = "button-link-toggle-show-answers";

@@ -20,7 +20,8 @@ import {
 import { addAnswer, getAnswer } from './answer-service';
 
 const questionId = '30';
-const questionId26Questions = '1';
+const quizId26Questions = '1';
+const validQuizId = '2';
 const invalidCorrectAnswer = '0';
 const newQuestionQuizId = '3';
 const newQuestionText = 'What percentage of the human body is water?';
@@ -34,11 +35,11 @@ const updateCorrectAnswerId = '97';
 describe('question-service', () => {
   describe('checkNumberOfQuestions', () => {
     it('returns true if number of questions is less than 26', async () => {
-      const result = await checkNumberOfQuestions(questionId);
+      const result = await checkNumberOfQuestions(validQuizId);
       expect(result).toEqual(true);
     });
     it('returns undefined if number of questions is 26 or more', async () => {
-      const result = await checkNumberOfQuestions(questionId26Questions);
+      const result = await checkNumberOfQuestions(quizId26Questions);
       expect(result).toEqual(undefined);
     });
   });

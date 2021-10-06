@@ -10,15 +10,16 @@ jest.doMock('./options', () => ({ options }));
 import { ClientConfig } from 'pg';
 import {
   getAnswer,
-  checkNumberOfAnswers,
+  checkNumberOfAnswersLessThanFive,
+  checkNumberOfAnswersMoreThanThree,
   addAnswer,
   checkAnswerIsNotCorrect,
   deleteAnswer,
   updateAnswer,
 } from './answer-service';
 
-const answerId = '66';
-const answerIdFiveAnswers = '80';
+const questionId = '1';
+const questionIdFiveAnswers = '30';
 const newAnswerText = 'Mg';
 const newAnswerQuestionId = '31';
 const newAnswerId = '103';
@@ -29,13 +30,27 @@ const updateAnswerId = '81';
 const updateAnswerText = 'will be';
 
 describe('answer-service', () => {
-  describe('checkNumberOfAnswers', () => {
+  describe('checkNumberOfAnswersLessThanFive', () => {
     it('returns true if number of answers is less than five', async () => {
-      const result = await checkNumberOfAnswers(answerId);
+      const result = await checkNumberOfAnswersLessThanFive(questionId);
       expect(result).toEqual(true);
     });
     it('returns undefined if the number of answers is more than 4', async () => {
-      const result = await checkNumberOfAnswers(answerIdFiveAnswers);
+      const result = await checkNumberOfAnswersLessThanFive(
+        questionIdFiveAnswers
+      );
+      expect(result).toEqual(undefined);
+    });
+  });
+  describe('checkNumberOfAnswersMoreThanThree', () => {
+    it('returns true if number of answers is more than three', async () => {
+      const result = await checkNumberOfAnswersMoreThanThree(
+        questionIdFiveAnswers
+      );
+      expect(result).toEqual(true);
+    });
+    it('returns undefined if the number of answers is more than 4', async () => {
+      const result = await checkNumberOfAnswersMoreThanThree(questionId);
       expect(result).toEqual(undefined);
     });
   });

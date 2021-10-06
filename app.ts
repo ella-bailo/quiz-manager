@@ -4,6 +4,7 @@ import handlebars from 'express-handlebars';
 import { router as userRouter } from './routes/users';
 import { router as quizRouter } from './routes/quiz';
 import { router as questionRouter } from './routes/question';
+import { router as answerRouter } from './routes/answer';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,6 +38,7 @@ app.engine(
 app.use('/', userRouter);
 app.use('/quiz', quizRouter);
 app.use('/question', questionRouter);
+app.use('/answer', answerRouter);
 app.use((_, res) => {
   res.render('error-page.handlebars', error404);
 });

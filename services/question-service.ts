@@ -24,21 +24,16 @@ export const getQuestion = async (questionId: string): Promise<Question> => {
 };
 
 export const checkNumberOfQuestions = async (
-  questionId: string
+  quizId: string
 ): Promise<true | void> => {
   const client = await connect();
   const response = await client.query(
-    'SELECT quiz_id FROM question WHERE question_id = $1',
-    [questionId]
-  );
-  const quizId = response.rows[0]['quiz_id'];
-  const secondResponse = await client.query(
     'SELECT * FROM question WHERE quiz_id = $1',
     [quizId]
   );
   client.end();
 
-  if (secondResponse.rows.length < 25) {
+  if (response.rows.length < 25) {
     return true;
   }
 };

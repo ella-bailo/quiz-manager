@@ -557,7 +557,7 @@ span {
 	width: 768px;
 	max-width: 100%;
 	margin-bottom: 40px;
-	min-height: 650px;
+	min-height: 750px;
 	border-left-style: solid;
 	border-left-width: 10px;
 	border-left-color: var(--accent);
@@ -570,6 +570,7 @@ span {
 	margin-bottom: 10px;
 	min-height: 30px;
 	border-color: var(--accent);
+	border-width: 1px;
 }
 
 .edit-label {
@@ -620,6 +621,7 @@ span {
 
 .delete-question-button {
 	border-radius: 4px;
+	margin-top: 10px;
 	padding: 5px;
 	border: 1px solid var(--black);
 	background-color: var(--black);
@@ -645,4 +647,15 @@ span {
 	margin-left: 30px;
 	margin-top: 15px;
 
+}
+
+.correct-answer-input {
+	border-color: var(--accent);
+	padding: 5px;
+	margin-top: 10px;
+	min-width: 400px;
+}
+
+.number-of-questions {
+	color: var(--accent);
 }

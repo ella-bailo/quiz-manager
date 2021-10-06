@@ -21,21 +21,30 @@ export const getAnswer = async (answerId: string): Promise<Answer> => {
   return response.rows[0];
 };
 
-export const checkNumberOfAnswers = async (
-  answerId: string
+export const checkNumberOfAnswersLessThanFive = async (
+  questionId: string
 ): Promise<true | void> => {
   const client = await connect();
   const response = await client.query(
-    'SELECT question_id FROM answer WHERE answer_id = $1',
-    [answerId]
-  );
-  const questionId = response.rows[0]['question_id'];
-  const secondResponse = await client.query(
     'SELECT * FROM answer WHERE question_id = $1',
     [questionId]
   );
   client.end();
-  if (secondResponse.rows.length < 5) {
+  if (response.rows.length < 5) {
+    return true;
+  }
+};
+
+export const checkNumberOfAnswersMoreThanThree = async (
+  questionId: string
+): Promise<true | void> => {
+  const client = await connect();
+  const response = await client.query(
+    'SELECT * FROM answer WHERE question_id = $1',
+    [questionId]
+  );
+  client.end();
+  if (response.rows.length > 3) {
     return true;
   }
 };

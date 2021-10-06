@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
       });
       res.redirect(302, '/quiz/all');
     }
-  } catch (e) {
-    console.log(e);
+  } catch {
+    return res.render('log-in.handlebars');
   }
 });
