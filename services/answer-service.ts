@@ -18,6 +18,7 @@ export const getAnswer = async (answerId: string): Promise<Answer> => {
     'SELECT * FROM answer WHERE answer_id = $1',
     [answerId]
   );
+  client.end();
   return response.rows[0];
 };
 

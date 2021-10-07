@@ -1,6 +1,12 @@
 import express from 'express';
 import { middleware } from '../middleware/middleware';
-import { getQuiz, getQuizzes, verifyQuizId } from '../services/quiz-service';
+import {
+  deleteQuiz,
+  getQuiz,
+  getQuizzes,
+  verifyQuizId,
+  addQuiz,
+} from '../services/quiz-service';
 import { checkPermissions } from '../middleware/check-permissions';
 
 const error403 = {
@@ -23,9 +29,11 @@ router.get('/all', async (req, res) => {
     const permissions = await checkPermissions(req);
     if (!permissions['invalid']) {
       const quizList = await getQuizzes();
+      const message = req.cookies['EDIT-MESSAGE'];
       const data = {
         quiz: quizList,
         permission: permissions,
+        message: message,
       };
       res.render('view-all.handlebars', data);
     } else {
@@ -36,7 +44,7 @@ router.get('/all', async (req, res) => {
   }
 });
 
-router.get('/new', async (req, res) => {
+router.get('/add', async (req, res) => {
   try {
     const permissions = await checkPermissions(req);
     if (permissions['edit']) {
@@ -94,6 +102,68 @@ router.get('/edit/:quizId', async (req, res) => {
       res.render('edit-quiz.handlebars', data);
     } else {
       res.render('error-page.handlebars', error403);
+    }
+  } catch {
+    res.render('error-page.handlebars', error500);
+  }
+});
+
+router.post('/add', async (req, res) => {
+  const { quizName, quizDescription } = req.body;
+  try {
+    let errorParams: null | string = null;
+
+    const permissions = await checkPermissions(req);
+    if (!permissions['edit']) {
+      res.render('error-page.handlebars', error403);
+    }
+    if (!quizName || !quizDescription) {
+      const message = 'Name and description must be provided';
+      errorParams = message;
+      const data = { message: message, permissions: permissions };
+      res.render('create-quiz.handlebars', data);
+    }
+    if (errorParams === null) {
+      const newQuiz = await addQuiz(quizName, quizDescription);
+      const message = `Quiz with id ${newQuiz} created`;
+      res.cookie('EDIT-MESSAGE', message, {
+        maxAge: 1000 * 10,
+        httpOnly: false,
+      });
+      res.redirect(302, `/quiz/edit/${newQuiz}`);
+    }
+  } catch {
+    res.render('error-page.handlebars', error500);
+  }
+});
+
+router.post('/delete', async (req, res) => {
+  const { quizId } = req.body;
+  try {
+    let errorParams: null | string = null;
+
+    const permissions = await checkPermissions(req);
+    if (!permissions['edit']) {
+      res.render('error-page.handlebars', error403);
+    }
+    if (!quizId) {
+      const message = 'Required parameters have not been provided';
+      errorParams = message;
+      res.cookie('EDIT-MESSAGE', message, {
+        maxAge: 1000 * 1,
+        httpOnly: false,
+      });
+    }
+    if (errorParams === null) {
+      await deleteQuiz(quizId);
+      const message = 'Quiz deleted succsessfully';
+      res.cookie('EDIT-MESSAGE', message, {
+        maxAge: 1000 * 1,
+        httpOnly: false,
+      });
+      res.redirect(302, '/quiz/all');
+    } else {
+      res.redirect(302, `/quiz/edit/${quizId}`);
     }
   } catch {
     res.render('error-page.handlebars', error500);

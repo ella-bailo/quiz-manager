@@ -1,12 +1,12 @@
 {{>header }}
+<title>Edit quiz page</title>
 {{>quiz-info }}
 <h3 id="number-of-questions" class="number-of-questions">Number of questions</h3>
 <h2>{{message}}</h2>
-<title>Edit quiz page</title>
 
 <div class="button-and-form-wrapper">
 	<form id="delete-quiz-form-{{quiz.quiz_id}}" method="post" action="/quiz/delete" class="delete-quiz-form">
-		<input type="text" name="quizId" value="{{quiz.quiz.quiz_id}}" hidden/>
+		<input type="text" name="quizId" value="{{quiz.quiz_id}}" hidden/>
 		<input type="submit" value="Delete quiz" class="button-link-toggle"/>
 	</form>
 	<a tabindex="-1" href="/quiz/{{quiz.quiz_id}}"><button class="button-link-toggle-edit">View Quiz</button></a>

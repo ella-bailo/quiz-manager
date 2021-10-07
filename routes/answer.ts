@@ -52,11 +52,12 @@ router.post('/add', async (req, res) => {
     }
     if (errorParams === null && errorAnswers === null) {
       const newAnswer = await addAnswer(answer, questionId);
-      const message = `answer with id ${newAnswer} added`;
+      const message = `Answer with id ${newAnswer} added`;
       res.cookie('EDIT-MESSAGE', message, {
         maxAge: 1000 * 10,
         httpOnly: false,
       });
+      res.redirect(302, `/quiz/edit/${quizId}`);
     } else {
       res.redirect(302, `/quiz/edit/${quizId}`);
     }
@@ -119,7 +120,6 @@ router.post('/delete', async (req, res) => {
         httpOnly: false,
       });
     }
-
     const question = await getQuestion(questionId);
     const quizId = question['quiz_id'];
     const numberOfAnswers = await checkNumberOfAnswersMoreThanThree(questionId);
@@ -141,7 +141,6 @@ router.post('/delete', async (req, res) => {
         httpOnly: false,
       });
     }
-
     if (
       errorParams === null &&
       errorNumbers === null &&

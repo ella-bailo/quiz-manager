@@ -1,8 +1,9 @@
 {{>header }}
 <title>Create quiz page</title>
+<h2>{{message}}</h2>
 <div class="create-quiz-container">
 	<h1>Create quiz</h1>
-	<form class="create-quiz-form">
+	<form class="create-quiz-form" method="post" action="/quiz/add">
 		<label for="quizName">Quiz name:</label></br>
 		<input id="quizName" name="quizName" class="edit-input"></br>
 		<label for="quizDescription">Quiz description:</label></br>
