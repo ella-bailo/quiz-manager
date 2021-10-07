@@ -48,6 +48,10 @@ span {
 	font-size: 12px;
 }
 
+::placeholder { 
+	color: var(--accent);
+}
+
 .navbar {
 	margin: 20px;
 	width: 100%;

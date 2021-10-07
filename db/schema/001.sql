@@ -27,7 +27,7 @@ CREATE TABLE question (
 CREATE TABLE answer (
     answer_id bigserial,
     question_id bigint,
-    answer varchar,
+    answer varchar NOT NULL,
     CONSTRAINT fk_question FOREIGN KEY(question_id) REFERENCES question(question_id) ON DELETE CASCADE
 );
 

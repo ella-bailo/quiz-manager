@@ -28,6 +28,20 @@ export const verifyQuizId = async (quizId: string): Promise<true | void> => {
   }
 };
 
+export const checkQuizName = async (
+  quizName: string
+): Promise<true | undefined> => {
+  const client = await connect();
+  const response = await client.query(
+    'SELECT * FROM quiz WHERE quiz_name = $1',
+    [quizName]
+  );
+  client.end();
+  if (!response.rows[0]) {
+    return true;
+  }
+};
+
 export const addQuiz = async (
   quizName: string,
   quizDescription: string

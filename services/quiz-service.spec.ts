@@ -12,6 +12,7 @@ import {
   getQuizzes,
   getQuiz,
   verifyQuizId,
+  checkQuizName,
   addQuiz,
   deleteQuiz,
 } from './quiz-service';
@@ -24,6 +25,8 @@ const newQuizId = '4';
 const deletedQuizId = '1';
 const deletedQuestionId = '1';
 const deletedAnswerId = '1';
+const validQuizName = 'New Quiz';
+const invalidQuizName = 'Maths Quiz';
 
 const sampleQuizOne = {
   quiz_id: '1',
@@ -121,6 +124,16 @@ describe('quiz-service', () => {
     });
     it('returns undefined if quizId is not the database', async () => {
       const result = await verifyQuizId(invalidQuizId);
+      expect(result).toEqual(undefined);
+    });
+  });
+  describe('checkQuizName', () => {
+    it('it returns true if quiz name does not exist', async () => {
+      const result = await checkQuizName(validQuizName);
+      expect(result).toEqual(true);
+    });
+    it('returns undefined if quiz name already exists', async () => {
+      const result = await checkQuizName(invalidQuizName);
       expect(result).toEqual(undefined);
     });
   });

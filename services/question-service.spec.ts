@@ -49,10 +49,10 @@ describe('question-service', () => {
       const result = await checkCorrectAnswerExists(correctAnswer);
       expect(result).toEqual(true);
     });
-  });
-  it('returns undefined if correct answer does not exist', async () => {
-    const result = await checkCorrectAnswerExists(invalidCorrectAnswer);
-    expect(result).toEqual(undefined);
+    it('returns undefined if correct answer does not exist', async () => {
+      const result = await checkCorrectAnswerExists(invalidCorrectAnswer);
+      expect(result).toEqual(undefined);
+    });
   });
   describe('addQuestion', () => {
     it('returns question id of new question', async () => {

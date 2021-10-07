@@ -45,7 +45,7 @@ router.post('/add', async (req, res) => {
       const message = 'Max of 26 questions reached';
       errorQuestions = message;
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
     }
@@ -58,7 +58,7 @@ router.post('/add', async (req, res) => {
       const message = `question with id ${newQuestion} added`;
 
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
       res.redirect(302, `/quiz/edit/${quizId}`);
@@ -83,7 +83,7 @@ router.post('/update', async (req, res) => {
       const message = 'update must be provided';
       errorParams = message;
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
     }
@@ -91,7 +91,7 @@ router.post('/update', async (req, res) => {
       await updateQuestion(questionId, question);
       const message = 'Question updated successfully';
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
       res.redirect(302, `/quiz/edit/${quizId}`);
@@ -116,7 +116,7 @@ router.post('/update-correct-answer', async (req, res) => {
       const message = 'New correct answer must be provided';
       errorParams = message;
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
     }
@@ -124,7 +124,7 @@ router.post('/update-correct-answer', async (req, res) => {
       await updateCorrectAnswer(questionId, correctAnswer);
       const message = 'Correct answer updated sucssesfully';
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
       res.redirect(302, `/quiz/edit/${quizId}`);
@@ -149,7 +149,7 @@ router.post('/delete', async (req, res) => {
       const message = 'Required parameters have not been provided';
       errorParams = message;
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
     }
@@ -157,7 +157,7 @@ router.post('/delete', async (req, res) => {
       await deleteQuestion(questionId);
       const message = 'Question deleted sucsessfully';
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
       res.redirect(302, `/quiz/edit/${quizId}`);

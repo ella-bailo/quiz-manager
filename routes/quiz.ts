@@ -6,6 +6,7 @@ import {
   getQuizzes,
   verifyQuizId,
   addQuiz,
+  checkQuizName,
 } from '../services/quiz-service';
 import { checkPermissions } from '../middleware/check-permissions';
 
@@ -112,6 +113,7 @@ router.post('/add', async (req, res) => {
   const { quizName, quizDescription } = req.body;
   try {
     let errorParams: null | string = null;
+    let errorName: null | string = null;
 
     const permissions = await checkPermissions(req);
     if (!permissions['edit']) {
@@ -123,7 +125,14 @@ router.post('/add', async (req, res) => {
       const data = { message: message, permissions: permissions };
       res.render('create-quiz.handlebars', data);
     }
-    if (errorParams === null) {
+    const validQuizName = await checkQuizName(quizName);
+    if (validQuizName === undefined) {
+      const message = 'Quiz name already exists';
+      errorName = message;
+      const data = { message: message, permissions: permissions };
+      res.render('create-quiz.handlebars', data);
+    }
+    if (errorParams === null && errorName === null) {
       const newQuiz = await addQuiz(quizName, quizDescription);
       const message = `Quiz with id ${newQuiz} created`;
       res.cookie('EDIT-MESSAGE', message, {
@@ -150,7 +159,7 @@ router.post('/delete', async (req, res) => {
       const message = 'Required parameters have not been provided';
       errorParams = message;
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
     }
@@ -158,7 +167,7 @@ router.post('/delete', async (req, res) => {
       await deleteQuiz(quizId);
       const message = 'Quiz deleted succsessfully';
       res.cookie('EDIT-MESSAGE', message, {
-        maxAge: 1000 * 1,
+        maxAge: 1000 * 10,
         httpOnly: false,
       });
       res.redirect(302, '/quiz/all');

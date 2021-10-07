@@ -6,7 +6,7 @@ import { router as quizRouter } from './routes/quiz';
 import { router as questionRouter } from './routes/question';
 import { router as answerRouter } from './routes/answer';
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 const error404 = { error: 404, message: 'Page not found.' };
 
