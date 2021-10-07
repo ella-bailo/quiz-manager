@@ -435,7 +435,7 @@ span {
 }
 
 .buttons-wrapper {
-	margin-top: 18px;
+	margin-top: 40px;
 	margin-left: 450px;
 }
 
@@ -557,10 +557,10 @@ span {
 	width: 768px;
 	max-width: 100%;
 	margin-bottom: 40px;
-	min-height: 750px;
 	border-left-style: solid;
 	border-left-width: 10px;
 	border-left-color: var(--accent);
+	padding-bottom: 40px;
 
 }
 
@@ -658,4 +658,64 @@ span {
 
 .number-of-questions {
 	color: var(--accent);
+}
+
+.create-quiz-container {
+	background-color: var(--white);
+	border-radius: 10px;
+	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	position: relative;
+	overflow: hidden;
+	width: 500px;
+	max-width: 100%;
+	min-height: 480px;
+	margin-top: 150px;
+	align-items: center;
+	text-align: center;
+	padding-top: 20px;
+}
+
+.create-quiz-form {
+	background-color: var(--white);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding:0 50px;
+	margin-top: 60px;
+	height: 100%;
+	color: var(--dark);
+	font-weight: bold;
+}
+
+.button-and-form-wrapper {
+	margin-left: 450px;	
+}
+
+.delete-quiz-form {
+	display: inline-block;
+}
+
+.button-link-toggle-edit {
+	display: inline-block;
+	background: var(--shadow-dark);
+	padding: 10px 25px;
+	border: 1px solid var(--shadow-dark);
+	background-color: var(--shadow-dark);
+	color: #fff;
+	border-radius: 4px;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+	min-width: 150px;
+}
+
+.edit-answer-form {
+	display: inline-block;
+}
+
+.delete-answer-form {
+	display: inline-block;
 }

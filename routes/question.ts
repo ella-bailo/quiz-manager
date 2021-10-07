@@ -49,7 +49,6 @@ router.post('/add', async (req, res) => {
         httpOnly: false,
       });
     }
-    console.log(errorQuestions, errorParams);
     if (errorQuestions === null && errorParams === null) {
       const newQuestion = await addQuestion(question, quizId);
       await addAnswer(answerTwo, newQuestion);

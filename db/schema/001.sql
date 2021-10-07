@@ -21,14 +21,14 @@ CREATE TABLE question (
     question varchar NOT NULL, 
     correct_answer bigint NOT NULL,
     PRIMARY KEY (question_id),
-    CONSTRAINT fk_quiz FOREIGN KEY(quiz_id) REFERENCES quiz(quiz_id)
+    CONSTRAINT fk_quiz FOREIGN KEY(quiz_id) REFERENCES quiz(quiz_id) ON DELETE CASCADE
 );
 
 CREATE TABLE answer (
     answer_id bigserial,
     question_id bigint,
     answer varchar,
-    CONSTRAINT fk_question FOREIGN KEY(question_id) REFERENCES question(question_id)
+    CONSTRAINT fk_question FOREIGN KEY(question_id) REFERENCES question(question_id) ON DELETE CASCADE
 );
 
 CREATE INDEX quiz_idx ON quiz (quiz_id);

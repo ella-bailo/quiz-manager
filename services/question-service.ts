@@ -67,7 +67,6 @@ export const addQuestion = async (
 
 export const deleteQuestion = async (questionId: string): Promise<void> => {
   const client = await connect();
-  await client.query('DELETE FROM answer WHERE question_id = $1', [questionId]);
   await client.query('DELETE FROM question WHERE question_id = $1', [
     questionId,
   ]);
