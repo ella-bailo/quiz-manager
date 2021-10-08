@@ -38,7 +38,9 @@
 		if (button.className == "button-link-toggle-show-answers") {
 			for (const question in questions) {
 				const correctAnswer = questions[question]['correct_answer'];
-				document.getElementById(correctAnswer).className = "correct-answer";
+				const element = document.getElementById(correctAnswer);
+				element.className = "correct-answer";
+				element.removeAttribute("aria-label");
 			};
 			button.className = "button-link-toggle-hide-answers";
 			button.textContent = "Hide answers";
@@ -49,6 +51,7 @@
 			while (correctAnswers.length > 0) {
 				for (const answer of correctAnswers) {
 					answer.className = "answer";
+					answer.setAttribute("aria-label", "correct answer");
 				};
 			};
 			button.className = "button-link-toggle-show-answers";
