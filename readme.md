@@ -4,6 +4,17 @@ A CRUD website buit with express and handlebars to facilitate the managment of q
 ## Prerequisites
 You will need to have [docker](https://docs.docker.com/get-docker/) set up to run the database.
 
+## Node 
+This app was built using node 14 
+
+To check your node version: 
+
+`node -v` 
+
+To switch to version 14:
+
+`nvm use 14`
+
 ## Running 
 
 first spin up the database: 
