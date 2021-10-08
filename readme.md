@@ -20,13 +20,49 @@ OR
 
 ## Testing
 
-Spin up the database:
+Spin up the databases:
 
 `docker-compose up`
 
 Then in a new terminal:
 
-`npm run dev`
+`npm run test`
+
+The docker containers need to be stopped and removed imbetween each test run. This includes prior to commit.
+To stop the containers `CTRL + C` in the terminal where docker is running. Then: `docker rm $(docker ps -a -q)` to remove all stopped containers. 
+
+
+## User permissions 
+
+User information has been pre configured to the database using SQL inserts. 
+A user with each level permission has been added. 
+
+To test the functionality of the site the following credentials can be used:
+
+### Restricted 
+
+username: 
+`restricted_user`
+
+password:
+`restricted_password`
+
+### View 
+
+username: 
+`view_user`
+
+password:
+`view_password`
+
+### Edit
+
+username: 
+`edit_user`
+
+password: 
+`edit_password`
+
 
 ## Deploying 
 
